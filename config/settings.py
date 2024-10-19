@@ -13,13 +13,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 
 # Add these at the top of your settings.py
+import os
 from os import getenv
-from dotenv import load_dotenv
-
+from dotenv import load_dotenv, find_dotenv
+from urllib.parse import urlparse
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+load_dotenv(find_dotenv())
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -90,7 +91,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Replace the DATABASES section of your settings.py with this
 # Add these at the top of your settings.py
 
-load_dotenv()
 # Replace the DATABASES section of your settings.py with this
 DATABASES = {
   'default': {
@@ -102,6 +102,7 @@ DATABASES = {
     'PORT': getenv('PGPORT', 5432),
     'OPTIONS': {
       'sslmode': 'require',
+      'options': getenv('PGENDPOINTOPTIONS')
     },
   }
 }

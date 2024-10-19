@@ -7,3 +7,9 @@ env/
 .env
 
 .vscode/
+
+*.cfg
+
+lib*
+
+bin/
